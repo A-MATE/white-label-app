@@ -1,0 +1,12 @@
+{
+  "logo": "logo-clientTest.png",
+  "theme": {
+    "primaryColor": "green",
+    "secondaryColor": "#FFFF00",
+    "font": "Arial"
+  },
+  "feature_flags": {
+    "feature1": false,
+    "feature2": true
+  }
+}

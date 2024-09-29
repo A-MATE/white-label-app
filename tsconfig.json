@@ -1,3 +1,15 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "resolveJsonModule": true, // Permet l'importation de fichiers JSON
+    "esModuleInterop": true, // Facilite l'importation des modules CommonJS
+    // "strict": true, // Recommandé pour une meilleure vérification de type
+    "baseUrl": "./" // Optionnel : Facilite les chemins relatifs
+  },
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
 }
