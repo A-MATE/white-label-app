@@ -3,8 +3,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
 import {getClientConfig} from '../clients';
+import Home from './features/home/screens/Home';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -24,7 +24,9 @@ const App = () => {
     setLoading(false);
   }, []);
 
-  const {theme, feature_flags} = config;
+  console.log('====================================');
+  console.log('config', config);
+  console.log('====================================');
 
   return (
     <NavigationContainer>
@@ -32,8 +34,7 @@ const App = () => {
         screenOptions={() => ({
           headerShown: false,
         })}>
-        {/* <Tab.Screen name="Home" component={HomeModule} /> */}
-        <View>Authorized App</View>
+        <Tab.Screen name="Home" component={Home} />
       </Tab.Navigator>
     </NavigationContainer>
   );
