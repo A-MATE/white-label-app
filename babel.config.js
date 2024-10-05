@@ -14,5 +14,14 @@ module.exports = {
         allowUndefined: true,
       },
     ],
+    [
+      'module-resolver',
+      {
+        root: ['./'],
+        alias: {
+          src: './src',
+        },
+      },
+    ],
   ],
 };

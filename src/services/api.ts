@@ -24,15 +24,14 @@ const getHeaders = async (
 };
 
 const handleRequest = async (
-  url: string,
+  endpoint: string,
   method: string,
   data?: any,
   contentType = 'application/json',
   requiresAuth: boolean = true,
 ) => {
   const headers = await getHeaders(contentType, requiresAuth);
-  const apiUrl = `${API_URL}${url}`;
-
+  const apiUrl = `${API_URL}${endpoint}`;
   try {
     const response = await axios({
       url: apiUrl,

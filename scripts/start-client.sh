@@ -11,4 +11,4 @@ ENVIRONMENT=$2
 export CLIENT_NAME=$CLIENT_NAME
 export ENVIRONMENT=$ENVIRONMENT
 
-npx react-native start
+npx react-native start --reset-cache

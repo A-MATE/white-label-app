@@ -1,10 +1,13 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "jsx": "react", // Ajoute cette ligne pour que TypeScript reconnaisse le JSX comme du React
     "resolveJsonModule": true, // Permet l'importation de fichiers JSON
     "esModuleInterop": true, // Facilite l'importation des modules CommonJS
-    // "strict": true, // Recommandé pour une meilleure vérification de type
-    "baseUrl": "./" // Optionnel : Facilite les chemins relatifs
+    "baseUrl": "./", // Optionnel : Facilite les chemins relatifs
+    "paths": {
+      "src/*": ["src/*"]
+    }
   },
   "exclude": [
     "node_modules",
