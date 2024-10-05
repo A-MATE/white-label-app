@@ -1,0 +1,6 @@
+export enum EnvVars {
+  API_URL = 'API_URL',
+  CLIENT_NAME = 'CLIENT_NAME',
+  CLIENT_ID = 'CLIENT_ID',
+  ENVIRONMENT = 'ENVIRONMENT',
+}
