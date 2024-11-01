@@ -1,10 +1,10 @@
 export const darkColors = {
-  primary: 'rgb(187, 134, 252)',
-  secondary: 'rgb(3, 218, 198)',
-  background: 'rgb(20, 20, 20)',
-  text: 'rgb(255, 255, 255)',
-  success: 'rgb(76, 175, 80)',
-  error: 'rgb(207, 102, 121)',
-  warning: 'rgb(255, 193, 7)',
-  info: 'rgb(3, 169, 244)',
+  primary: '#85ceed',
+  secondary: '#03DAC6',
+  background: '#0f0f0f',
+  text: '#FFFFFF',
+  success: '#4CAF50',
+  error: '#CF6679',
+  warning: '#FFC107',
+  info: '#03A9F4',
 };

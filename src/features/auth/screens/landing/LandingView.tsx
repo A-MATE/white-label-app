@@ -3,6 +3,7 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 import CustomButton from 'src/commons/components/buttons/customButton/CustomButton';
+import AuthBackground from '../../components/auth-background/AuthBackground';
 import styles from './LandingView.styles';
 
 const LandingView = () => {
@@ -15,14 +16,18 @@ const LandingView = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.buttonRegister}
-        onPress={handleOnPressRegister}>
-        <Text style={styles.registerButtonText}>Register</Text>
-      </TouchableOpacity>
-      <CustomButton onPress={handleOnPressLogin} title="Login" />
-    </View>
+    <AuthBackground>
+      <View style={styles.container}>
+        <View style={styles.actionContainer}>
+          <TouchableOpacity
+            style={styles.buttonRegister}
+            onPress={handleOnPressRegister}>
+            <Text style={styles.registerButtonText}>Register</Text>
+          </TouchableOpacity>
+          <CustomButton onPress={handleOnPressLogin} title="Login" />
+        </View>
+      </View>
+    </AuthBackground>
   );
 };
 
