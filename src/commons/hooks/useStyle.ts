@@ -1,8 +1,9 @@
+import {Theme} from '@react-navigation/native';
 import {useMemo} from 'react';
 import {useThemeColors} from './useThemeColors';
 
 export default function useStyle(
-  styleSheet: (theme: Record<string, any>) => Record<string, any>,
+  styleSheet: (theme: Theme) => Record<string, any>,
 ) {
   const themeColors = useThemeColors();
 

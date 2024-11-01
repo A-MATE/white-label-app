@@ -1,9 +1,9 @@
 import client0Config from './client0/config/config.json';
-import clientTestConfig from './clientTest/config/config.json';
+import defaultConfig from './default/config/config.json';
 
 const clientConfigs: Record<string, any> = {
+  default: defaultConfig,
   client0: client0Config,
-  clientTest: clientTestConfig,
 };
 
 export const getClientConfig = (clientName: string) => {

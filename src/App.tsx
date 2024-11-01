@@ -1,43 +1,47 @@
-import {CLIENT_NAME} from '@env';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useEffect, useState} from 'react';
-import {getClientConfig} from '../clients';
-import Home from './features/home/screens/Home';
+import React, {useEffect} from 'react';
+import {Provider} from 'react-redux';
+import AuthApp from './AuthApp';
+import MainApp from './MainApp';
+import useAppDispatch from './commons/hooks/useAppDispatch';
+import useAppSelector from './commons/hooks/useAppSelector';
+import {useClientConfig} from './commons/hooks/useClientConfig';
+import useEnvCheck from './commons/hooks/useEnvCheck';
+import {useThemeColors} from './commons/hooks/useThemeColors';
+import {checkAuth} from './features/auth/state/authSlice';
+import {store} from './store/store';
 
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+const RootComponent = () => {
+  const {isEnvReady, missingVars} = useEnvCheck();
+  const {clientConfig, error, loading} = useClientConfig();
+  const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
+  const authStatus = useAppSelector(state => state.auth.status);
 
-const App = () => {
-  const [config, setConfig] = useState<any | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const processedTheme = useThemeColors();
+
+  console.log('====================================');
+  console.log('Client Config:', clientConfig);
+  console.log('====================================');
 
   useEffect(() => {
-    const clientConfig = getClientConfig(CLIENT_NAME);
-    if (clientConfig) {
-      setConfig(clientConfig);
-    } else {
-      setError(`No config found for client: ${CLIENT_NAME}`);
-    }
-    setLoading(false);
-  }, []);
+    dispatch(checkAuth());
+  }, [dispatch]);
 
-  console.log('====================================');
-  console.log('config', config);
-  console.log('====================================');
+  if (!isEnvReady || authStatus === 'loading') {
+    return null;
+  }
 
-  return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={() => ({
-          headerShown: false,
-        })}>
-        <Tab.Screen name="Home" component={Home} />
-      </Tab.Navigator>
-    </NavigationContainer>
+  return isAuthenticated ? (
+    <MainApp theme={processedTheme} />
+  ) : (
+    <AuthApp theme={processedTheme} />
   );
 };
+
+const App = () => (
+  <Provider store={store}>
+    <RootComponent />
+  </Provider>
+);
 
 export default App;

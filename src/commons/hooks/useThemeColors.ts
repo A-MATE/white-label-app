@@ -1,8 +1,19 @@
+import {DarkTheme, DefaultTheme, Theme} from '@react-navigation/native';
 import {useColorScheme} from 'react-native';
-import {darkColors} from 'src/dsm/colors/dark/colors';
-import {lightColors} from 'src/dsm/colors/light/colors';
+import {darkColors} from 'src/commons/styles/colors/dark/colors';
+import {lightColors} from 'src/commons/styles/colors/light/colors';
 
-export const useThemeColors = () => {
+export const useThemeColors = (): Theme => {
   const colorScheme = useColorScheme();
-  return colorScheme === 'dark' ? darkColors : lightColors;
+  const baseTheme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
+
+  const theme = {
+    ...baseTheme,
+    colors: {
+      ...baseTheme.colors,
+      ...(colorScheme === 'dark' ? darkColors : lightColors),
+    },
+  };
+
+  return theme;
 };

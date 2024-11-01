@@ -1,10 +1,13 @@
-import {NavigationContainer} from '@react-navigation/native';
-import React from 'react';
+import {NavigationContainer, Theme} from '@react-navigation/native';
+import React, {FC} from 'react';
 import {AuthStack} from './features/auth/navigation/AuthStack';
 
-const AuthApp = () => {
+type AuthAppProps = {
+  theme: Theme;
+};
+const AuthApp: FC<AuthAppProps> = ({theme}) => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <AuthStack />
     </NavigationContainer>
   );

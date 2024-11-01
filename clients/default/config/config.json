@@ -1,8 +1,7 @@
 {
-  "logo": "logo-client0.png",
   "theme": {
-    "primaryColor": "#FF0000",
-    "secondaryColor": "#00FF00",
+    "primary": "#75aaff",
+    "secondary": "#75ffc8",
     "font": "Helvetica"
   },
   "feature_flags": {

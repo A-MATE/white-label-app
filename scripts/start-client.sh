@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ] || [ -z "$2" ]; then
-  echo "Usage: yarn startClient <CLIENT_NAME> <ENVIRONMENT>"
+  echo "Usage: yarn start-client <CLIENT_NAME> <ENVIRONMENT>"
   exit 1
 fi
 
