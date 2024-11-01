@@ -1,15 +1,15 @@
 import {Theme} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
-import {BorderRadius} from 'src/commons/styles/boderRadius.enum';
+import {BorderRadius} from 'src/shared/styles/boderRadius.enum';
 
 const styleSheet = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      height: 50,
-      width: 110,
+      height: 40,
+      width: 115,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme.colors.primary,
+      backgroundColor: theme.colors.white,
       borderRadius: BorderRadius.xl,
     },
   });

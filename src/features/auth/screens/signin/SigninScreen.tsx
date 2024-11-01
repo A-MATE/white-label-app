@@ -5,15 +5,16 @@ import {
   Platform,
   Text,
   TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 
-import useStyle from 'src/commons/hooks/useStyle';
-import {RequestStatus} from 'src/commons/types/requestStatus.enum';
+import useStyle from 'src/shared/hooks/useStyle';
+import {RequestStatus} from 'src/shared/types/requestStatus.enum';
 
-import CustomButton from 'src/commons/components/buttons/customButton/CustomButton';
-import CustomInput from 'src/commons/components/inputs/customTextInput/CustomTextInput';
-import useAppDispatch from 'src/commons/hooks/useAppDispatch';
-import useAppSelector from 'src/commons/hooks/useAppSelector';
+import CustomButton from 'src/shared/components/buttons/customButton/CustomButton';
+import CustomInput from 'src/shared/components/inputs/customTextInput/CustomTextInput';
+import useAppDispatch from 'src/shared/hooks/useAppDispatch';
+import useAppSelector from 'src/shared/hooks/useAppSelector';
 import {loginUser} from '../../services/authThunks';
 import styleSheet from './SigninScreen.styles';
 
@@ -58,11 +59,12 @@ const SigninScreen = () => {
           secureTextEntry
         />
 
-        <CustomButton title="Sign In" onPress={handleOnClick} />
+        <View style={styles.footer}>
+          <CustomButton title="Sign In" onPress={handleOnClick} />
 
-        {/* Display loading indicator or error message */}
-        {status === RequestStatus.LOADING && <Text>Loading...</Text>}
-        {status === RequestStatus.FAILED && <Text>{error}</Text>}
+          {status === RequestStatus.LOADING && <Text>Loading...</Text>}
+          {status === RequestStatus.FAILED && <Text>{error}</Text>}
+        </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );

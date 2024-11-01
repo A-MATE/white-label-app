@@ -1,11 +1,22 @@
 import {StyleSheet} from 'react-native';
-import {Spacing} from 'src/commons/styles/spacing.enum';
+import {Spacing} from 'src/shared/styles/spacing.enum';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  logoContainer: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: Spacing.xxxl,
+  },
+  teamLogo: {
+    height: 180,
+    aspectRatio: 1,
   },
   actionContainer: {
     width: '100%',
@@ -17,11 +28,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonRegister: {
+    height: 40,
+    width: 115,
     backgroundColor: 'transparent',
     borderColor: 'white',
     borderWidth: 1,
-    height: 50,
-    width: 110,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
@@ -30,7 +41,6 @@ const styles = StyleSheet.create({
   },
   registerButtonText: {
     color: 'white',
-    fontWeight: 'bold',
   },
 });
 

@@ -1,10 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-
-import CustomButton from 'src/commons/components/buttons/customButton/CustomButton';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import CustomButton from 'src/shared/components/buttons/customButton/CustomButton';
 import AuthBackground from '../../components/auth-background/AuthBackground';
-import styles from './LandingView.styles';
+import styles from './LandingScreen.styles';
 
 const LandingView = () => {
   const navigation = useNavigation();
@@ -18,13 +17,20 @@ const LandingView = () => {
   return (
     <AuthBackground>
       <View style={styles.container}>
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.teamLogo}
+            source={require('../../../../assets/images/team-logo.png')}
+            resizeMode="contain"
+          />
+        </View>
         <View style={styles.actionContainer}>
           <TouchableOpacity
             style={styles.buttonRegister}
             onPress={handleOnPressRegister}>
-            <Text style={styles.registerButtonText}>Register</Text>
+            <Text style={styles.registerButtonText}>Signup</Text>
           </TouchableOpacity>
-          <CustomButton onPress={handleOnPressLogin} title="Login" />
+          <CustomButton onPress={handleOnPressLogin} title="Signin" />
         </View>
       </View>
     </AuthBackground>

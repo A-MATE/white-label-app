@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import useStyle from 'src/commons/hooks/useStyle';
+import useStyle from 'src/shared/hooks/useStyle';
 import styleSheet from './CustomButton.styles';
 
 type CustomButtonProps = {

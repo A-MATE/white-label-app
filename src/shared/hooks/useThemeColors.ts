@@ -1,7 +1,7 @@
 import {DarkTheme, DefaultTheme, Theme} from '@react-navigation/native';
 import {useColorScheme} from 'react-native';
-import {darkColors} from 'src/commons/styles/colors/dark/colors';
-import {lightColors} from 'src/commons/styles/colors/light/colors';
+import {darkColors} from 'src/shared/styles/colors/dark/colors';
+import {lightColors} from 'src/shared/styles/colors/light/colors';
 
 export const useThemeColors = (): Theme => {
   const colorScheme = useColorScheme();

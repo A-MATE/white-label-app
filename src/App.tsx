@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
 import AuthApp from './AuthApp';
-import MainApp from './MainApp';
-import useAppDispatch from './commons/hooks/useAppDispatch';
-import useAppSelector from './commons/hooks/useAppSelector';
-import {useClientConfig} from './commons/hooks/useClientConfig';
-import useEnvCheck from './commons/hooks/useEnvCheck';
-import {useThemeColors} from './commons/hooks/useThemeColors';
 import {checkAuth} from './features/auth/state/authSlice';
+import MainApp from './MainApp';
+import useAppDispatch from './shared/hooks/useAppDispatch';
+import useAppSelector from './shared/hooks/useAppSelector';
+import {useClientConfig} from './shared/hooks/useClientConfig';
+import useEnvCheck from './shared/hooks/useEnvCheck';
+import {useThemeColors} from './shared/hooks/useThemeColors';
 import {store} from './store/store';
 
 const RootComponent = () => {
