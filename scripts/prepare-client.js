@@ -28,7 +28,7 @@ try {
     __dirname,
     `../clients/${client}/config/config.json`,
   );
-  const generatedJsPath = path.resolve(__dirname, '../src/config/generated.js');
+  const generatedJsPath = path.resolve(__dirname, '../src/config/config.js');
 
   if (!fs.existsSync(configPath)) {
     throw new Error(`Missing config.json for client ${client}`);
@@ -47,7 +47,7 @@ try {
     __dirname,
     `../clients/${client}/environments/.env.${env}`,
   );
-  const envOutput = path.resolve(__dirname, '../.env.generated');
+  const envOutput = path.resolve(__dirname, '../.env');
 
   if (!fs.existsSync(envPath)) {
     throw new Error(`Missing .env.${env} for ${client}`);
@@ -66,6 +66,33 @@ try {
   fse.emptyDirSync(destAssets);
   fse.copySync(srcAssets, destAssets);
   console.log(`✅ Assets copied for ${client}`);
+
+  // ✨ Mise à jour ou création du fichier entitlements avec syntaxe dynamique
+  const entitlementsPath = path.resolve(
+    __dirname,
+    '../ios/WhiteLabelApp/WhiteLabelApp.entitlements',
+  );
+  const expectedContent = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>com.apple.application-identifier</key>
+  <string>\$(AppIdentifierPrefix)\$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+</dict>
+</plist>
+`;
+
+  let currentContent = '';
+  if (fs.existsSync(entitlementsPath)) {
+    currentContent = fs.readFileSync(entitlementsPath, 'utf8');
+  }
+
+  if (currentContent !== expectedContent) {
+    fs.writeFileSync(entitlementsPath, expectedContent, 'utf8');
+    console.log(`✅ Entitlements file written/updated for ${client}`);
+  } else {
+    console.log('ℹ️ Entitlements already up-to-date – skipped.');
+  }
 } catch (error) {
   console.error(`❌ ${error.message}`);
   process.exit(1);

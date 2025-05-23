@@ -15,7 +15,7 @@ const AuthBackground: React.FC<AuthBackgroundProps> = ({children}) => {
 
   return (
     <ImageBackground
-      source={require('../../../../assets/images/signup-bg.png')}
+      source={require('../../../../assets/images/landing-bg.png')}
       style={styles.imageBackground}
       resizeMode="cover">
       <LinearGradient

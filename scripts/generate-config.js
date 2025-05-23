@@ -11,7 +11,7 @@ const inputPath = path.resolve(
   __dirname,
   `../clients/${client}/config/config.json`,
 );
-const outputPath = path.resolve(__dirname, '../src/config/generated.js');
+const outputPath = path.resolve(__dirname, '../src/config/config.js');
 
 if (!fs.existsSync(inputPath)) {
   console.error(`❌ Missing file: ${inputPath}`);

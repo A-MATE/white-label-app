@@ -1,0 +1,71 @@
+platform :ios do
+  lane :build_and_deploy do |options|
+    client = options[:client]
+    env = options[:env] || "prod"
+
+    project_root = File.expand_path("../..", __dir__)
+    client_path = "#{project_root}/clients/#{client}"
+
+    # Étape 1 : Préparer la config
+    sh("node #{project_root}/scripts/prepare-client.js --client=#{client} --env=#{env}")
+
+    # Étape 2 : Copier les App Icons
+    appicon_src = "#{client_path}/assets/appicon/AppIcon.appiconset"
+    appicon_dest_root = "./WhiteLabelApp/Images.xcassets"
+    appicon_dest = "#{appicon_dest_root}/AppIcon.appiconset"
+
+    unless File.directory?(appicon_src)
+      UI.user_error!("❌ AppIcon.appiconset not found for client #{client} at #{appicon_src}")
+    end
+
+    sh("mkdir -p '#{appicon_dest_root}'")
+    sh("rm -rf '#{appicon_dest}'")
+    sh("cp -R '#{appicon_src}' '#{appicon_dest}'")
+    UI.success("✅ AppIcon copied for #{client}")
+
+    # Étape 3 : Modifier Info.plist
+    require 'json'
+    config_path = "#{client_path}/config/config.json"
+
+    unless File.exist?(config_path)
+      UI.user_error!("❌ config.json not found for client #{client}")
+    end
+
+    config = JSON.parse(File.read(config_path))
+    app_name = config["app_name"] || client
+    bundle_id = config["bundle_id"] || "com.a-mate.#{client}"
+
+    update_info_plist(
+      plist_path: "WhiteLabelApp/Info.plist",
+      display_name: app_name,
+      app_identifier: bundle_id
+    )
+    UI.success("✅ Info.plist updated for #{client} (#{bundle_id})")
+
+    # Étape 4 : Build
+    scheme = case env
+             when "dev"     then "WhiteLabelApp-Dev"
+             when "staging" then "WhiteLabelApp-Staging"
+             when "prod"    then "WhiteLabelApp-Prod"
+             else UI.user_error!("❌ Unknown environment: #{env}")
+             end
+
+    build_app(
+      scheme: scheme,
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          bundle_id => "match AppStore #{bundle_id}"
+        },
+        signingStyle: "manual",
+        teamID: "A2F9F28JR5"
+      },
+      output_directory: "#{project_root}/build/#{client}/ios"
+    )
+
+    # Étape 5 : TestFlight (optionnel)
+    # upload_to_testflight(
+    #   skip_waiting_for_build_processing: true
+    # )
+  end
+end
