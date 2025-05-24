@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import LandingView from '../screens/landing/LandingView';
+import LandingView from '../screens/landing/LandingScreen';
 import SigninScreen from '../screens/signin/SigninScreen';
 import SignupScreen from '../screens/signup/SignupScreen';
 
@@ -25,7 +25,7 @@ export const AuthStack = () => (
       headerShown: true,
 
       headerTransparent: true,
-      headerTitle: 'A-MATE',
+      headerTitle: '',
     }}>
     <Stack.Screen
       name="landing-view"

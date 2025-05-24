@@ -1,0 +1,14 @@
+// AUTO-GENERATED FILE
+export default {
+  "app_name": "AMSC",
+  "bundle_id": "com.a-mate.amsc",
+  "theme": {
+    "primaryColor": "#FF0000",
+    "secondaryColor": "#00FF00",
+    "font": "Helvetica"
+  },
+  "feature_flags": {
+    "feature1": true,
+    "feature2": false
+  }
+};
