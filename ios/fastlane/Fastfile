@@ -2,28 +2,46 @@ platform :ios do
   lane :build_and_deploy do |options|
     client = options[:client]
     env = options[:env] || "prod"
+    version_number = options[:version]
 
     project_root = File.expand_path("../..", __dir__)
     client_path = "#{project_root}/clients/#{client}"
 
     # Étape 1 : Préparer la config
+    UI.message("📦 Preparing config for client #{client} (env: #{env})...")
     sh("node #{project_root}/scripts/prepare-client.js --client=#{client} --env=#{env}")
 
     # Étape 2 : Copier les App Icons
-    appicon_src = "#{client_path}/assets/appicon/AppIcon.appiconset"
-    appicon_dest_root = "./WhiteLabelApp/Images.xcassets"
+    UI.message("🖼️ Copying App Icons for client #{client}...")
+    appicon_src = "#{client_path}/assets/appicon/ios/AppIcon.appiconset"
+    appicon_dest_root = "#{project_root}/ios/WhiteLabelApp/Images.xcassets"  # Chemin absolu corrigé
     appicon_dest = "#{appicon_dest_root}/AppIcon.appiconset"
 
     unless File.directory?(appicon_src)
       UI.user_error!("❌ AppIcon.appiconset not found for client #{client} at #{appicon_src}")
     end
+    UI.message("📂 Source directory: #{appicon_src}")
+
+    # Lister les fichiers source pour débogage
+    sh("ls -l '#{appicon_src}'")
 
     sh("mkdir -p '#{appicon_dest_root}'")
     sh("rm -rf '#{appicon_dest}'")
     sh("cp -R '#{appicon_src}' '#{appicon_dest}'")
     UI.success("✅ AppIcon copied for #{client}")
 
+    # Lister les fichiers destination pour débogage
+    sh("ls -l '#{appicon_dest}'")
+
+    # Vérification de l'icône 120x120
+    icon_120_path = "#{appicon_dest}/Icon-App-60x60@2x.png"
+    unless File.exist?(icon_120_path)
+      UI.user_error!("❌ Missing required icon file (120x120 pixels) at #{icon_120_path}")
+    end
+    UI.success("✅ Verified 120x120 icon exists")
+
     # Étape 3 : Modifier Info.plist
+    UI.message("📋 Updating Info.plist for client #{client}...")
     require 'json'
     config_path = "#{client_path}/config/config.json"
 
@@ -40,6 +58,46 @@ platform :ios do
       display_name: app_name,
       app_identifier: bundle_id
     )
+
+    # Ajouter la clé CFBundleIconName
+    set_info_plist_value(
+      path: "WhiteLabelApp/Info.plist",
+      key: "CFBundleIconName",
+      value: "AppIcon"
+    )
+    UI.success("✅ Added CFBundleIconName to Info.plist")
+
+    # Étape 3.1 : Gérer le numéro de version et de build
+    if version_number
+      UI.message("🔢 Setting version number to #{version_number}...")
+      set_info_plist_value(
+        path: "WhiteLabelApp/Info.plist",
+        key: "CFBundleShortVersionString",
+        value: version_number
+      )
+      UI.success("✅ Version number updated to #{version_number}")
+    end
+
+    UI.message("🔢 Incrementing build number...")
+    xcodeproj_path = "#{project_root}/ios/WhiteLabelApp.xcodeproj"
+
+    # Étape 3.2 : Configurer l'authentification pour latest_testflight_build_number
+    UI.message("🔑 Configuring App Store Connect API authentication for fetching build number...")
+    api_key = {
+      key_id: ENV["APP_STORE_CONNECT_KEY_ID"] || UI.user_error!("❌ APP_STORE_CONNECT_KEY_ID environment variable is not set"),
+      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"] || UI.user_error!("❌ APP_STORE_CONNECT_ISSUER_ID environment variable is not set"),
+      key: File.read("/Users/jean-charles/fastlane_p8/AuthKey_4JJ8Y5UNY5.p8"),
+      in_house: false
+    }
+
+    # Passer api_key à latest_testflight_build_number
+    increment_build_number(
+      xcodeproj: xcodeproj_path,
+      build_number: latest_testflight_build_number(app_identifier: bundle_id, api_key: api_key) + 1
+    )
+    new_build_number = get_build_number(xcodeproj: xcodeproj_path)
+    UI.success("✅ Build number incremented to #{new_build_number}")
+
     UI.success("✅ Info.plist updated for #{client} (#{bundle_id})")
 
     # Étape 4 : Build
@@ -49,6 +107,7 @@ platform :ios do
              when "prod"    then "WhiteLabelApp-Prod"
              else UI.user_error!("❌ Unknown environment: #{env}")
              end
+    UI.message("🏗️ Building the app for scheme #{scheme}...")
 
     build_app(
       scheme: scheme,
@@ -62,10 +121,17 @@ platform :ios do
       },
       output_directory: "#{project_root}/build/#{client}/ios"
     )
+    UI.success("✅ App successfully built")
 
-    # Étape 5 : TestFlight (optionnel)
-    # upload_to_testflight(
-    #   skip_waiting_for_build_processing: true
-    # )
+    # Étape 5 : Envoyer à TestFlight avec la même api_key
+    UI.message("🚀 Uploading to TestFlight...")
+    upload_to_testflight(
+      app_identifier: bundle_id,
+      skip_waiting_for_build_processing: true,
+      changelog: "New build for #{client} - #{env} environment",
+      distribute_external: false,
+      api_key: api_key
+    )
+    UI.success("✅ Uploaded to TestFlight for #{client} (#{bundle_id})")
   end
 end
