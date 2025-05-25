@@ -9,7 +9,7 @@ const styleSheet = (theme: Theme) =>
       width: 115,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.text,
       borderRadius: BorderRadius.xl,
     },
   });

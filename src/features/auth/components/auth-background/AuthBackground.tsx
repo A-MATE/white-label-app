@@ -5,9 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import useStyle from 'src/shared/hooks/useStyle';
 import styleSheet from './AuthBackground.styles';
 
-type AuthBackgroundProps = {
-  children: React.ReactNode;
-};
+type AuthBackgroundProps = {children: React.ReactNode};
 
 const AuthBackground: React.FC<AuthBackgroundProps> = ({children}) => {
   const styles = useStyle(styleSheet);
@@ -15,31 +13,33 @@ const AuthBackground: React.FC<AuthBackgroundProps> = ({children}) => {
 
   return (
     <ImageBackground
-      source={require('../../../../assets/images/landing-bg.png')}
+      source={require('../../../../assets/images/auth-bg.png')}
       style={styles.imageBackground}
       resizeMode="cover">
       <LinearGradient
         colors={[
-          `${colors.background}FF`,
-          `${colors.background}CC`,
-          'transparent',
+          `${colors.background}`,
+          'rgba(0,0,0,0.95)',
+          'rgba(0,0,0,0.8)',
+          'rgba(0,0,0,0.5)',
+          'rgba(0,0,0,0.3)',
           'transparent',
         ]}
-        start={{x: 1, y: 0.1}}
-        end={{x: 0.5, y: 1}}
+        start={{x: 0.3, y: 0.1}}
+        end={{x: 0.2, y: 0.5}}
         style={styles.gradient}
       />
-
       <LinearGradient
         colors={[
-          `${colors.background}FF`,
-          // `${colors.background}CC`,
-          `${colors.background}80`,
-          'transparent',
+          `${colors.background}`,
+          'rgba(0,0,0,0.95)',
+          'rgba(0,0,0,0.8)',
+          'rgba(0,0,0,0.5)',
+          'rgba(0,0,0,0.3)',
           'transparent',
         ]}
-        start={{x: 0.1, y: 0.9}}
-        end={{x: 0.2, y: 0}}
+        start={{x: 0.2, y: 0.9}}
+        end={{x: 0.3, y: 0.5}}
         style={styles.gradient}
       />
       <View style={styles.content}>{children}</View>
