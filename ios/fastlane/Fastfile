@@ -13,7 +13,7 @@ platform :ios do
 
     # Étape 2 : Copier les App Icons
     UI.message("🖼️ Copying App Icons for client #{client}...")
-    appicon_src = "#{client_path}/assets/appicon/ios/AppIcon.appiconset"
+    appicon_src = "#{client_path}/assets/appicon/#{env}/ios/AppIcon.appiconset"
     appicon_dest_root = "#{project_root}/ios/WhiteLabelApp/Images.xcassets"  # Chemin absolu corrigé
     appicon_dest = "#{appicon_dest_root}/AppIcon.appiconset"
 

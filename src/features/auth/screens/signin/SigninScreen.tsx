@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import useStyle from 'src/shared/hooks/useStyle';
-import {RequestStatus} from 'src/shared/types/requestStatus.enum';
+import {RequestStatus} from 'src/shared/types/request-status.enum';
 
 import CustomButton from 'src/shared/components/buttons/customButton/CustomButton';
 import CustomInput from 'src/shared/components/inputs/customTextInput/CustomTextInput';

@@ -1,16 +1,7 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import StorageManager from 'src/services/storageManager';
-import {RequestStatus} from 'src/shared/types/requestStatus.enum';
-import {loginUser} from '../services/authThunks';
-
-export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
-  const token = await StorageManager.checkToken();
-  if (token) {
-    return true;
-  } else {
-    return false;
-  }
-});
+import {RequestStatus} from 'src/shared/types/request-status.enum';
+import {checkAuth, loginUser} from '../services/authThunks';
 
 const authSlice = createSlice({
   name: 'auth',
