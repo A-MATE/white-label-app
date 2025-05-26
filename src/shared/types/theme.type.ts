@@ -1,3 +1,15 @@
+import {Theme as NavigationTheme} from '@react-navigation/native';
+
+export interface AppTheme extends NavigationTheme {
+  customColors: ThemeColors;
+  borderRadius: {
+    default: number;
+    button: number;
+    card: number;
+    input: number;
+  };
+}
+
 export interface ThemeColors {
   brand: {
     primary: string;
@@ -15,17 +27,20 @@ export interface ThemeColors {
     disabled: string;
   };
   button: {
-    primary: {
+    default: {
       background: string;
       text: string;
+      border: string;
     };
-    secondary: {
+    outlined: {
       background: string;
       text: string;
+      border: string;
     };
-    disabled: {
+    ghost: {
       background: string;
       text: string;
+      border: string;
     };
   };
   card: {

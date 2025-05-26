@@ -11,33 +11,30 @@ const AuthBackground: React.FC<AuthBackgroundProps> = ({children}) => {
   const styles = useStyle(styleSheet);
   const {colors} = useTheme();
 
+  const base = colors.background.replace('#', '');
+
+  const gradientColors = [
+    `#${base}FF`, // 100%
+    `#${base}F2`, // 95%
+    `#${base}CC`, // 80%
+    `#${base}80`, // 50%
+    `#${base}4D`, // 30%
+    `#${base}00`, // 0%
+  ];
+
   return (
     <ImageBackground
       source={require('../../../../assets/images/auth-bg.png')}
       style={styles.imageBackground}
       resizeMode="cover">
       <LinearGradient
-        colors={[
-          `${colors.background}`,
-          'rgba(0,0,0,0.95)',
-          'rgba(0,0,0,0.8)',
-          'rgba(0,0,0,0.5)',
-          'rgba(0,0,0,0.3)',
-          'transparent',
-        ]}
+        colors={gradientColors}
         start={{x: 0.3, y: 0.1}}
         end={{x: 0.2, y: 0.5}}
         style={styles.gradient}
       />
       <LinearGradient
-        colors={[
-          `${colors.background}`,
-          'rgba(0,0,0,0.95)',
-          'rgba(0,0,0,0.8)',
-          'rgba(0,0,0,0.5)',
-          'rgba(0,0,0,0.3)',
-          'transparent',
-        ]}
+        colors={gradientColors}
         start={{x: 0.2, y: 0.9}}
         end={{x: 0.3, y: 0.5}}
         style={styles.gradient}

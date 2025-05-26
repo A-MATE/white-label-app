@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, View} from 'react-native';
 import CustomButton from 'src/shared/components/buttons/customButton/CustomButton';
 import AuthBackground from '../../components/auth-background/AuthBackground';
 import styles from './LandingScreen.styles';
@@ -25,12 +25,16 @@ const LandingView = () => {
           />
         </View>
         <View style={styles.actionContainer}>
-          <TouchableOpacity
-            style={styles.buttonRegister}
-            onPress={handleOnPressRegister}>
-            <Text style={styles.registerButtonText}>Signup</Text>
-          </TouchableOpacity>
-          <CustomButton onPress={handleOnPressLogin} title="Signin" />
+          <CustomButton
+            variant="outlined"
+            onPress={handleOnPressRegister}
+            title="Signup"
+          />
+          <CustomButton
+            variant="default"
+            onPress={handleOnPressLogin}
+            title="Signin"
+          />
         </View>
       </View>
     </AuthBackground>

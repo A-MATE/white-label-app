@@ -6,15 +6,20 @@ import styleSheet from './CustomButton.styles';
 type CustomButtonProps = {
   onPress: () => void;
   title: string;
+  variant: 'default' | 'outlined' | 'ghost';
 };
 
-const CustomButton: FC<CustomButtonProps> = ({onPress, title}) => {
+const CustomButton: FC<CustomButtonProps> = ({onPress, title, variant}) => {
   const styles = useStyle(styleSheet);
 
+  const containerStyle = [styles.container, styles[`${variant}Container`]];
+
+  const titleStyle = styles[`${variant}Title`];
+
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={containerStyle} onPress={onPress}>
       <View>
-        <Text>{title} </Text>
+        <Text style={titleStyle}>{title}</Text>
       </View>
     </TouchableOpacity>
   );

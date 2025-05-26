@@ -30,3 +30,11 @@ export const loginUser = createAsyncThunk(
     }
   },
 );
+
+export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
+  const token = await StorageManager.checkToken();
+  if (token) {
+    return true;
+  }
+  return false;
+});

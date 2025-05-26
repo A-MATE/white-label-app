@@ -5,9 +5,9 @@
     "colors": {
       "light": {
         "brand": {
-          "primary": "#FF0000",
-          "secondary": "#00FF00",
-          "tertiary": "#0000FF"
+          "primary": "#ef2e32",
+          "secondary": "#a5a6a5",
+          "tertiary": null
         },
         "background": {
           "screen": "#FFFFFF",
@@ -20,17 +20,20 @@
           "disabled": "#CCCCCC"
         },
         "button": {
-          "primary": {
-            "background": "#FF0000",
-            "text": "#FFFFFF"
+          "default": {
+            "background": "#000000",
+            "text": "#FFFFFF",
+            "border": "#000000"
           },
-          "secondary": {
-            "background": "#EEEEEE",
-            "text": "#000000"
+          "outlined": {
+            "background": "transparent",
+            "text": "#000000",
+            "border": "#000000"
           },
-          "disabled": {
-            "background": "#CCCCCC",
-            "text": "#888888"
+          "ghost": {
+            "background": "transparent",
+            "text": "#000000",
+            "border": "transparent"
           }
         },
         "card": {
@@ -86,17 +89,20 @@
           "disabled": "#555555"
         },
         "button": {
-          "primary": {
-            "background": "#FF5555",
-            "text": "#000000"
+          "default": {
+            "background": "#FFFFFF",
+            "text": "#000000",
+            "border": "#000000"
           },
-          "secondary": {
-            "background": "#333333",
-            "text": "#FFFFFF"
+          "outlined": {
+            "background": "transparent",
+            "text": "#FFFFFF",
+            "border": "#FFFFFF"
           },
-          "disabled": {
-            "background": "#444444",
-            "text": "#888888"
+          "ghost": {
+            "background": "transparent",
+            "text": "#FFFFFF",
+            "border": "transparent"
           }
         },
         "card": {
@@ -138,7 +144,7 @@
     },
     "borderRadius": {
       "default": 8,
-      "button": 6,
+      "button": 24,
       "card": 12,
       "input": 4
     },
