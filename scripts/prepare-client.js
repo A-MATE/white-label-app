@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const fse = require('fs-extra');
 const yargs = require('yargs');
+const util = require('util');
 
 const argv = yargs
   .option('client', {
@@ -24,25 +25,40 @@ const client = argv.client;
 const env = argv.env;
 
 try {
-  const configPath = path.resolve(
+  // 🔁 Chargement du config.json
+  const inputConfigPath = path.resolve(
     __dirname,
     `../clients/${client}/config/config.json`,
   );
-  const generatedJsPath = path.resolve(__dirname, '../src/config/config.js');
+  const outputConfigPath = path.resolve(__dirname, '../src/config/config.ts');
 
-  if (!fs.existsSync(configPath)) {
+  if (!fs.existsSync(inputConfigPath)) {
     throw new Error(`Missing config.json for client ${client}`);
   }
 
-  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  const jsOutput = `// AUTO-GENERATED FILE\nexport default ${JSON.stringify(
-    config,
-    null,
-    2,
-  )};\n`;
-  fs.writeFileSync(generatedJsPath, jsOutput);
-  console.log(`✅ Config generated for ${client}`);
+  const configObject = JSON.parse(fs.readFileSync(inputConfigPath, 'utf8'));
 
+  // ✅ Formatage pour TypeScript
+  const formattedObject = util.inspect(configObject, {
+    depth: null,
+    compact: false,
+    maxArrayLength: null,
+    breakLength: 80,
+    sorted: false,
+  });
+
+  const tsOutput = `// AUTO-GENERATED FILE
+import { AppConfig } from 'src/shared/types/app-config.type';
+
+const config: AppConfig = ${formattedObject};
+
+export default config;
+`;
+
+  fs.writeFileSync(outputConfigPath, tsOutput);
+  console.log(`✅ TypeScript config generated for ${client}`);
+
+  // 🔁 Copie du fichier .env
   const envPath = path.resolve(
     __dirname,
     `../clients/${client}/environments/.env.${env}`,
@@ -55,6 +71,7 @@ try {
   fs.copyFileSync(envPath, envOutput);
   console.log(`✅ .env.generated written for ${client} - ${env}`);
 
+  // 🔁 Copie des assets
   const srcAssets = path.resolve(
     __dirname,
     `../clients/${client}/assets/images`,
@@ -67,7 +84,7 @@ try {
   fse.copySync(srcAssets, destAssets);
   console.log(`✅ Assets copied for ${client}`);
 
-  // ✨ Mise à jour ou création du fichier entitlements avec syntaxe dynamique
+  // ✨ Mise à jour du fichier entitlements
   const entitlementsPath = path.resolve(
     __dirname,
     '../ios/WhiteLabelApp/WhiteLabelApp.entitlements',

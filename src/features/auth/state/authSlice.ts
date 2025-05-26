@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import StorageManager from 'src/services/storageManager';
-import {RequestStatus} from 'src/shared/types/requestStatus.enum';
+import {RequestStatus} from 'src/shared/types/request-status.enum';
 import {loginUser} from '../services/authThunks';
 
 export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {

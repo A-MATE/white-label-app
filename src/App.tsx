@@ -5,20 +5,20 @@ import {checkAuth} from './features/auth/state/authSlice';
 import MainApp from './MainApp';
 import useAppDispatch from './shared/hooks/useAppDispatch';
 import useAppSelector from './shared/hooks/useAppSelector';
-import config from './config/config.js';
 
-// import useEnvCheck from './shared/hooks/useEnvCheck';
 import {useThemeColors} from './shared/hooks/useThemeColors';
 import {store} from './store/store';
 
 const RootComponent = () => {
-  // const {isEnvReady, missingVars} = useEnvCheck();
-
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
   const authStatus = useAppSelector(state => state.auth.status);
 
-  const processedTheme = useThemeColors();
+  const clientTheme = useThemeColors();
+
+  console.log('==============CLIENT THEME======================');
+  console.log(clientTheme);
+  console.log('====================================');
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -29,9 +29,9 @@ const RootComponent = () => {
   }
 
   return isAuthenticated ? (
-    <MainApp theme={{...processedTheme, ...config}} />
+    <MainApp theme={clientTheme} />
   ) : (
-    <AuthApp theme={{...processedTheme, ...config}} />
+    <AuthApp theme={clientTheme} />
   );
 };
 

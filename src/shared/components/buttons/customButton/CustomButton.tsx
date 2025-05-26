@@ -14,7 +14,7 @@ const CustomButton: FC<CustomButtonProps> = ({onPress, title}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View>
-        <Text>{title}</Text>
+        <Text>{title} </Text>
       </View>
     </TouchableOpacity>
   );
