@@ -18,6 +18,12 @@ import useAppSelector from 'src/shared/hooks/useAppSelector';
 import {loginUser} from '../../services/authThunks';
 import styleSheet from './SigninScreen.styles';
 
+import {API_URL, CLIENT_ID, ENVIRONMENT} from '@env';
+
+console.log('API_URL:', API_URL);
+console.log('CLIENT_ID:', CLIENT_ID);
+console.log('ENVIRONMENT:', ENVIRONMENT);
+
 const SigninScreen = () => {
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState<string | null>(null);
@@ -48,19 +54,23 @@ const SigninScreen = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
         <CustomInput
-          name="email"
-          placeholder="Email"
+          placeholder="Email "
           onChangeText={handleEmailChange}
+          value={email}
         />
         <CustomInput
-          name="password"
           placeholder="Password"
           onChangeText={handlePasswordChange}
           secureTextEntry
+          value={password}
         />
 
         <View style={styles.footer}>
-          <CustomButton title="Sign In" onPress={handleOnClick} />
+          <CustomButton
+            variant="default"
+            title="Sign In"
+            onPress={handleOnClick}
+          />
 
           {status === RequestStatus.LOADING && <Text>Loading...</Text>}
           {status === RequestStatus.FAILED && <Text>{error}</Text>}

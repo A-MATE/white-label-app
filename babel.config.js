@@ -1,6 +1,5 @@
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
-
   plugins: [
     ['@babel/plugin-transform-class-properties', {loose: true}],
     ['@babel/plugin-transform-private-methods', {loose: true}],
@@ -9,7 +8,7 @@ module.exports = {
       'module:react-native-dotenv',
       {
         moduleName: '@env',
-        path: `./clients/${process.env.CLIENT_NAME}/environments/.env.${process.env.ENVIRONMENT}`,
+        path: '.env',
         safe: false,
         allowUndefined: true,
       },

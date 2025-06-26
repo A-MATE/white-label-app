@@ -5,7 +5,7 @@ import styleSheet from './CustomTextInput.styles';
 
 type CustomInputProps = {
   placeholder?: string;
-  variant?: InputModeOptions;
+  inputMode?: InputModeOptions;
   onChangeText: (event: string | number) => void;
   value: string;
   secureTextEntry?: boolean;
@@ -13,7 +13,7 @@ type CustomInputProps = {
 
 const CustomInput: FC<CustomInputProps> = ({
   placeholder,
-  variant = 'text',
+  inputMode = 'text',
   onChangeText,
   value,
   secureTextEntry = false,
@@ -25,7 +25,7 @@ const CustomInput: FC<CustomInputProps> = ({
         style={styles.input}
         secureTextEntry={secureTextEntry}
         value={value}
-        inputMode={variant}
+        inputMode={inputMode}
         onChangeText={onChangeText}
         placeholder={placeholder}
         autoCapitalize="none"
