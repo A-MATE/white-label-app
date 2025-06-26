@@ -9,8 +9,6 @@ export const loginUser = createAsyncThunk(
     {rejectWithValue},
   ) => {
     try {
-      console.log('ALORS ??? ');
-
       const response = await baseRequest('/api/v1/auth/signin', 'POST', {
         email,
         password,

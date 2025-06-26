@@ -2,6 +2,9 @@ import {API_URL, CLIENT_ID} from '@env';
 import axios from 'axios';
 import StorageManager from './storageManager';
 
+console.log('api.ts -> API_URL:', API_URL);
+console.log('api.ts -> CLIENT_ID:', CLIENT_ID);
+
 const getHeaders = async (
   contentType: string,
   requiresAuth: boolean = true,
@@ -33,7 +36,7 @@ const baseRequest = async (
   const headers = await getHeaders(contentType, requiresAuth);
 
   const apiUrl = `${API_URL}${endpoint}`;
-  console.log('API URL:', apiUrl);
+  console.log('----- >>> API URL:', apiUrl);
 
   try {
     const response = await axios({

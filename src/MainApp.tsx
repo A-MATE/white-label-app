@@ -3,7 +3,7 @@ import {NavigationContainer, Theme} from '@react-navigation/native';
 import React, {FC} from 'react';
 
 import ClubScreen from './features/club/ClubScreen';
-import HomeScreen from './features/home/HomeScreen';
+import HomeScreen from './features/home/screens/HomeScreen';
 import MatchesScreen from './features/matches/MatchesScreen';
 import MediaScreen from './features/media/MediaScreen';
 
