@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const styleSheet = (theme: Record<string, any>) =>
+const styleSheet = (_theme: Record<string, any>) =>
   StyleSheet.create({
     imageBackground: {
       flex: 1,

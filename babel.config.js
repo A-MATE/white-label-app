@@ -1,9 +1,9 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: [
+    'module:metro-react-native-babel-preset',
+    '@babel/preset-typescript',
+  ],
   plugins: [
-    ['@babel/plugin-transform-class-properties', {loose: true}],
-    ['@babel/plugin-transform-private-methods', {loose: true}],
-    ['@babel/plugin-transform-private-property-in-object', {loose: true}],
     [
       'module:react-native-dotenv',
       {
@@ -22,6 +22,13 @@ module.exports = {
         },
       },
     ],
-    'react-native-reanimated/plugin',
+    [
+      'formatjs',
+      {
+        idInterpolationPattern: '[sha512:contenthash:base64:6]',
+        ast: true,
+      },
+    ],
+    'react-native-reanimated/plugin', // Should be the last plugin
   ],
 };

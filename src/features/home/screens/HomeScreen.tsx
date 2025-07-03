@@ -1,13 +1,15 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import HeaderCarousel from '../components/HeaderCarousel/HeaderCarousel';
+import HomeCarousels from '../components/HomeCarousels/HomeCarousels';
+import {ScrollView} from 'react-native';
 
 type HomeScreenProps = {};
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   return (
-    <SafeAreaView>
+    <ScrollView>
       <HeaderCarousel />
-    </SafeAreaView>
+      <HomeCarousels />
+    </ScrollView>
   );
 };
 

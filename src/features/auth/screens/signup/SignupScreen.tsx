@@ -11,18 +11,7 @@ import styleSheet from './SignupScreen.styles';
 import EmailStep from './views/signup-form-views/email-step/EmailStep';
 import PasswordStep from './views/signup-form-views/password-step/PasswordStep';
 
-const schema = z
-  .object({
-    email: z.string().email('Enter a valid email address'),
-    password: z.string().min(6, 'Password must be at least 6 characters'),
-    confirmPassword: z
-      .string()
-      .min(6, 'Confirm password must be at least 6 characters'),
-  })
-  .refine(data => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ['confirmPassword'],
-  });
+
 
 const SignupScreen = () => {
   const styles = useStyle(styleSheet);
@@ -41,8 +30,8 @@ const SignupScreen = () => {
   const {
     handleSubmit,
     watch,
-    formState: {isValid},
   } = methods;
+  
   const emailIsValid =
     watch('email') && methods.formState.errors.email === undefined;
 

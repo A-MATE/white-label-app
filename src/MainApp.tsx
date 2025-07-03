@@ -1,31 +1,30 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer, Theme} from '@react-navigation/native';
-import React, {FC} from 'react';
+import React from 'react';
 
 import ClubScreen from './features/club/ClubScreen';
 import HomeScreen from './features/home/screens/HomeScreen';
 import MatchesScreen from './features/matches/MatchesScreen';
 import MediaScreen from './features/media/MediaScreen';
+import MomentsScreen from './features/moments/screens/MomentsScreen';
 
 const Tab = createBottomTabNavigator();
 
 type MainAppProps = {
   theme: Theme;
 };
-const MainApp: FC<MainAppProps> = ({theme}) => {
+const MainApp = ({theme}: MainAppProps) => {
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={() => ({
-          sceneContainerStyle: {
-            backgroundColor: '#3b3b3b',
-          },
           headerShown: false,
         })}>
-        <Tab.Screen name="home" component={HomeScreen} />
-        <Tab.Screen name="matches" component={MatchesScreen} />
-        <Tab.Screen name="club" component={ClubScreen} />
-        <Tab.Screen name="media" component={MediaScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Games" component={MatchesScreen} />
+        <Tab.Screen name="Moments" component={MomentsScreen} />
+        <Tab.Screen name="Team" component={ClubScreen} />
+        <Tab.Screen name="News" component={MediaScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
