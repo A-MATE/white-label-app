@@ -1,40 +1,17 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Provider} from 'react-redux';
-import AuthApp from './AuthApp';
-
-import MainApp from './MainApp';
-import useAppDispatch from './shared/hooks/useAppDispatch';
-import useAppSelector from './shared/hooks/useAppSelector';
 
 import {store} from './store/store';
-import {useAppTheme} from './shared/hooks/useAppTheme';
-import {checkAuth} from './features/auth/services/authThunks';
 
-const RootComponent = () => {
-  const dispatch = useAppDispatch();
-  const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
-  const authStatus = useAppSelector(state => state.auth.status);
-
-  const clientTheme = useAppTheme();
-
-  useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch]);
-
-  if (authStatus === 'loading') {
-    return null;
-  }
-
-  return isAuthenticated ? (
-    <MainApp theme={clientTheme} />
-  ) : (
-    <AuthApp theme={clientTheme} />
-  );
-};
+import RootComponent from './RootComponent';
+import {I18nextProvider} from 'react-i18next';
+import i18n from './i18n/i18n';
 
 const App = () => (
   <Provider store={store}>
-    <RootComponent />
+    <I18nextProvider i18n={i18n}>
+      <RootComponent />
+    </I18nextProvider>
   </Provider>
 );
 

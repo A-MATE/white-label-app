@@ -168,6 +168,26 @@
     "profile": {
       "enabled": true,
       "version": 1
+    },
+    "games": {
+      "enabled": true,
+      "version": 1
+    },
+    "home": {
+      "enabled": true,
+      "version": 1
+    },
+    "moments": {
+      "enabled": true,
+      "version": 1
+    },
+    "club": {
+      "enabled": true,
+      "version": 1
+    },
+    "media": {
+      "enabled": true,
+      "version": 1
     }
   }
 }

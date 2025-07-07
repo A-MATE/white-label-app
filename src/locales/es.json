@@ -1,0 +1,11 @@
+{
+  "hello": "Hola",
+  "app.title": "a-mate Sports",
+  "auth.login": "Iniciar sesión",
+  "auth.register": "Registrarse",
+  "auth.forgotPassword": "Olvidé mi contraseña",
+  "auth.resetPassword": "Restablecer contraseña",
+  "auth.email": "Correo electrónico",
+  "auth.password": "Contraseña",
+  "auth.confirmPassword": "Confirmar contraseña"
+}
