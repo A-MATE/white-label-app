@@ -10,6 +10,11 @@ export interface Features {
   signin: FeatureConfig;
   signup: FeatureConfig;
   profile: FeatureConfig;
+  games: FeatureConfig;
+  home: FeatureConfig;
+  moments: FeatureConfig;
+  club: FeatureConfig;
+  media: FeatureConfig;
 }
 
 export interface AppConfig {

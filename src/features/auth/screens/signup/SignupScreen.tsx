@@ -1,6 +1,7 @@
 import {zodResolver} from '@hookform/resolvers/zod';
 import React, {useRef, useState} from 'react';
 import {FormProvider, useForm} from 'react-hook-form';
+import {useTranslation} from 'react-i18next';
 import {Button, View} from 'react-native';
 import PagerView from 'react-native-pager-view';
 import useStyle from 'src/shared/hooks/useStyle';
@@ -25,6 +26,7 @@ const schema = z
   });
 
 const SignupScreen = () => {
+  const {t} = useTranslation();
   const styles = useStyle(styleSheet);
   const pagerRef = useRef(null);
   const [scrollEnabled, setScrollEnabled] = useState(false);
@@ -74,11 +76,11 @@ const SignupScreen = () => {
         </PagerView>
         <View style={styles.actionContainer}>
           <Button
-            title="Next"
+            title={t('auth.next')}
             onPress={goToNextPage}
             disabled={!emailIsValid}
           />
-          <Button title="Submit" onPress={onSubmit} />
+          <Button title={t('auth.submit')} onPress={onSubmit} />
         </View>
       </AuthBackground>
     </FormProvider>

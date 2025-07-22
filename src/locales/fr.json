@@ -1,0 +1,21 @@
+{
+  "app.title": "a-mate Sports",
+  "auth.login": "Connexion",
+  "auth.register": "Inscription",
+  "auth.forgotPassword": "Mot de passe oublié",
+  "auth.resetPassword": "Réinitialiser le mot de passe",
+  "auth.email": "Email",
+  "auth.password": "Mot de passe",
+  "auth.confirmPassword": "Confirmer le mot de passe",
+  "auth.signup": "S'inscrire",
+  "auth.signin": "Se connecter",
+  "auth.next": "Suivant",
+  "auth.submit": "Soumettre",
+  "auth.loading": "Chargement...",
+  
+  "feature.home": "Accueil",
+  "feature.games": "Jeux",
+  "feature.moments": "Moments",
+  "feature.team": "Équipe",
+  "feature.social": "Social"
+}
