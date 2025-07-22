@@ -16,5 +16,6 @@
   "auth.signin": "Signin",
   "auth.next": "Next",
   "auth.submit": "Submit",
-  "auth.loading": "Loading..."
+  "auth.loading": "Loading...",
+  "auth.logout": "Logout",
 }

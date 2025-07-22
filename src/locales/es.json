@@ -16,5 +16,6 @@
   "auth.signin": "Iniciar sesión",
   "auth.next": "Siguiente",
   "auth.submit": "Enviar",
-  "auth.loading": "Cargando..."
+  "auth.loading": "Cargando...",
+  "auth.logout": "Cerrar sesión",
 }
