@@ -29,6 +29,18 @@ export const loginUser = createAsyncThunk(
   },
 );
 
+export const logoutUser = createAsyncThunk(
+  'auth/logoutUser',
+  async (_, {rejectWithValue}) => {
+    try {
+      await StorageManager.removeToken();
+      await StorageManager.removeUserId();
+    } catch (error) {
+      return rejectWithValue(error || 'Logout failed');
+    }
+  },
+);
+
 export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
   const token = await StorageManager.checkToken();
   if (token) {

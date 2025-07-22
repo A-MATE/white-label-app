@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import StorageManager from 'src/services/storageManager';
 import {RequestStatus} from 'src/shared/types/request-status.enum';
-import {checkAuth, loginUser} from '../services/authThunks';
+import {checkAuth, loginUser, logoutUser} from '../services/authThunks';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -12,14 +12,7 @@ const authSlice = createSlice({
     user: null,
     accessToken: null,
   },
-  reducers: {
-    logOut: state => {
-      state.isAuthenticated = false;
-      state.user = null;
-      state.accessToken = null;
-      StorageManager.removeToken();
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
 
@@ -54,9 +47,23 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.error = action.payload;
         state.status = RequestStatus.FAILED;
+      })
+
+      .addCase(logoutUser.pending, state => {
+        state.status = RequestStatus.LOADING;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, state => {
+        state.isAuthenticated = false;
+        state.user = null;
+        state.accessToken = null;
+        state.status = RequestStatus.SUCCEEDED;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.status = RequestStatus.FAILED;
+        state.error = action.payload;
       });
   },
 });
 
-export const {logOut} = authSlice.actions;
 export default authSlice.reducer;

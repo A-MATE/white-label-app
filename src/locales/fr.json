@@ -12,6 +12,7 @@
   "auth.next": "Suivant",
   "auth.submit": "Soumettre",
   "auth.loading": "Chargement...",
+  "auth.logout": "Déconnexion",
   
   "feature.home": "Accueil",
   "feature.games": "Jeux",
