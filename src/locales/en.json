@@ -1,5 +1,4 @@
 {
-  "hello": "Hello",
   "feature.home": "Home",
   "feature.games": "Games",
   "feature.moments": "Moments",
@@ -12,5 +11,10 @@
   "auth.resetPassword": "Reset Password",
   "auth.email": "Email",
   "auth.password": "Password",
-  "auth.confirmPassword": "Confirm Password"
+  "auth.confirmPassword": "Confirm Password",
+  "auth.signup": "Signup",
+  "auth.signin": "Signin",
+  "auth.next": "Next",
+  "auth.submit": "Submit",
+  "auth.loading": "Loading..."
 }

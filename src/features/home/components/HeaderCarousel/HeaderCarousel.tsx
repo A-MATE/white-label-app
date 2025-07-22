@@ -8,8 +8,6 @@ import Carousel, {
   Pagination,
 } from 'react-native-reanimated-carousel';
 import {useSharedValue} from 'react-native-reanimated';
-import {useTranslation} from 'react-i18next';
-import i18n from 'src/i18n/i18n';
 
 const data = [...new Array(6).keys()];
 const width = Dimensions.get('window').width;
@@ -17,7 +15,6 @@ const width = Dimensions.get('window').width;
 const HeaderCarousel = ({}) => {
   const styles = useStyle(styleSheet);
   const {colors} = useTheme();
-  const {t} = useTranslation();
 
   const ref = React.useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
@@ -49,7 +46,7 @@ const HeaderCarousel = ({}) => {
               justifyContent: 'center',
             }}>
             <Text style={{textAlign: 'center', fontSize: 30}}>
-              {t('hello')}
+              {index}
             </Text>
           </View>
         )}

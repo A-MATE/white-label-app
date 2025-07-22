@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -25,6 +26,7 @@ console.log('CLIENT_ID:', CLIENT_ID);
 console.log('ENVIRONMENT:', ENVIRONMENT);
 
 const SigninScreen = () => {
+  const {t} = useTranslation();
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
@@ -54,12 +56,12 @@ const SigninScreen = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
         <CustomInput
-          placeholder="Email "
+          placeholder={t('auth.email')}
           onChangeText={handleEmailChange}
           value={email}
         />
         <CustomInput
-          placeholder="Password"
+          placeholder={t('auth.password')}
           onChangeText={handlePasswordChange}
           secureTextEntry
           value={password}
@@ -68,11 +70,11 @@ const SigninScreen = () => {
         <View style={styles.footer}>
           <CustomButton
             variant="default"
-            title="Sign In"
+            title={t('auth.signin')}
             onPress={handleOnClick}
           />
 
-          {status === RequestStatus.LOADING && <Text>Loading...</Text>}
+          {status === RequestStatus.LOADING && <Text>{t('auth.loading')}</Text>}
           {status === RequestStatus.FAILED && <Text>{error}</Text>}
         </View>
       </KeyboardAvoidingView>

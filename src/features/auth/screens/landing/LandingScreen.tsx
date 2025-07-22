@@ -1,11 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 import {Image, View} from 'react-native';
 import CustomButton from 'src/shared/components/buttons/customButton/CustomButton';
 import AuthBackground from '../../components/auth-background/AuthBackground';
 import styles from './LandingScreen.styles';
 
 const LandingView = () => {
+  const {t} = useTranslation();
   const navigation = useNavigation();
   const handleOnPressRegister = () => {
     navigation.navigate('signup-stack');
@@ -28,12 +30,12 @@ const LandingView = () => {
           <CustomButton
             variant="outlined"
             onPress={handleOnPressRegister}
-            title="Signup"
+            title={t('auth.signup')}
           />
           <CustomButton
             variant="default"
             onPress={handleOnPressLogin}
-            title="Signin"
+            title={t('auth.signin')}
           />
         </View>
       </View>

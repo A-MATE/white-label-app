@@ -3,7 +3,7 @@ import {NavigationContainer, Theme} from '@react-navigation/native';
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 
-import ClubScreen from './features/club/ClubScreen';
+import ClubScreen from './features/team/TeamScreen';
 import HomeScreen from './features/home/screens/HomeScreen';
 import GamesScreen from './features/games/GamesScreen';
 import MediaScreen from './features/media/MediaScreen';
@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 type MainAppProps = {
   theme: Theme;
 };
-const MainApp: FC<MainAppProps> = ({theme}) => {
+const MainApp: FC<MainAppProps> = () => {
   const {t} = useTranslation();
   const {isEnabled: isHomeEnabled} = useFeatureFlag('home');
   const {isEnabled: isGamesEnabled} = useFeatureFlag('games');
@@ -52,5 +52,3 @@ const MainApp: FC<MainAppProps> = ({theme}) => {
 };
 
 export default MainApp;
-
-

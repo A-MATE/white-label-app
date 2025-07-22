@@ -180,7 +180,7 @@ const config: AppConfig = {
       version: 1,
     },
     moments: {
-      enabled: true,
+      enabled: false,
       version: 1,
     },
     club: {

@@ -1,5 +1,9 @@
 {
-  "hello": "Hola",
+  "feature.home": "Inicio",
+  "feature.games": "Juegos",
+  "feature.moments": "Momentos",
+  "feature.team": "Equipo",
+  "feature.social": "Social",
   "app.title": "a-mate Sports",
   "auth.login": "Iniciar sesión",
   "auth.register": "Registrarse",
@@ -7,5 +11,10 @@
   "auth.resetPassword": "Restablecer contraseña",
   "auth.email": "Correo electrónico",
   "auth.password": "Contraseña",
-  "auth.confirmPassword": "Confirmar contraseña"
+  "auth.confirmPassword": "Confirmar contraseña",
+  "auth.signup": "Registrarse",
+  "auth.signin": "Iniciar sesión",
+  "auth.next": "Siguiente",
+  "auth.submit": "Enviar",
+  "auth.loading": "Cargando..."
 }
